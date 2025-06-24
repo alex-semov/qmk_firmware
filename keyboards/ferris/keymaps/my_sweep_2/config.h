@@ -18,22 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
-/* key matrix size */
-#define MATRIX_ROWS 8
-#define MATRIX_COLS 10
 
-#define MATRIX_ROWS_PER_SIDE (MATRIX_ROWS / 2)
-#define MATRIX_COLS_PER_SIDE (MATRIX_COLS / 2)
+#define COMBO_ONLY_FROM_LAYER 0
 
-// wiring
-#define MATRIX_ROW_PINS_MCU \
-    { B3, B2, B1, F0 }
-#define MATRIX_COL_PINS_MCU \
-    { D6, D7, B4, B5, B6 }
-#define MATRIX_ROW_PINS_MCP \
-    { B0, B1, B2, B3 }
-#define MATRIX_COL_PINS_MCP \
-    { A0, A1, A2, A3, A4 }
+// Pick good defaults for enabling homerow modifiers
+#define TAPPING_TERM 175
+#define PERMISSIVE_HOLD
+// #define QUICK_TAP_TERM 0
+#define TAPPING_TERM_PER_KEY
 
-/* COL2ROW, ROW2COL*/
-#define DIODE_DIRECTION COL2ROW

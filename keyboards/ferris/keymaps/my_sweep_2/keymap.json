@@ -1,0 +1,8 @@
+{
+    "version": 2,
+    "bootloader": "rp2040_ce",
+    "processor": "RP2040",
+    "keyboard": "ferris/0_1",
+    "keymap": "my_sweep_2",
+    "author": "@pierrec83"
+}
