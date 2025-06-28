@@ -9,11 +9,7 @@ typedef struct {
     td_state_t state;
 } td_tap_t;
 
-enum {
-    TD_MOD_LAYER,
-    TD_NAV_LAYER,
-    TD_SCLN_COLN,
-};
+enum { TD_MOD_LAYER, TD_NAV_LAYER, TD_SCLN_COLN, TD_SHIFT };
 
 // Declare the functions to be used with your tap dance key(s)
 
