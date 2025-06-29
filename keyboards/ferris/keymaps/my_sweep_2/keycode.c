@@ -5,6 +5,13 @@
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     switch (keycode) {
+        case LCTL_T(KC_LBRC):
+        if (record->tap.count ) {
+            tap_code16(KC_LBRC); // Send KC_DQUO on tap
+            return false;        // Return false to ignore further processing of key
+        }
+        break;
+
       // --- Neovim Pane Control ---
       case NV_PANE_L:     SEND_STRING(SS_LCTL("w") "h"); break;
       case NV_PANE_D:     SEND_STRING(SS_LCTL("w") "j"); break;

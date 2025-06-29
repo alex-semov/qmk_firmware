@@ -7,6 +7,14 @@
 #include "keycode.h"
 
 const uint16_t PROGMEM combo_enter[] = {CKC_N, CKC_E, COMBO_END};
+const uint16_t PROGMEM combo_tab[] = {CKC_E, KC_I, COMBO_END};
+
+const uint16_t PROGMEM combo_en[] = {KC_F, CKC_T, COMBO_END};
+const uint16_t PROGMEM combo_el[] = {CKC_N, KC_U, COMBO_END};
+
+const uint16_t PROGMEM combo_slsh[] = {KC_H, CKC_E, COMBO_END};
+const uint16_t PROGMEM combo_bsls[] = {CKC_N, KC_COMMA, COMBO_END};
+
 const uint16_t PROGMEM combo_tmux_layer[] = {TKC_LR, CKC_S, COMBO_END};
 const uint16_t PROGMEM combo_nvim_layer[] = {TKC_LR, CKC_T, COMBO_END};
 // const uint16_t PROGMEM combo_dquote[] = {TD(TD_NAV_LAYER), KC_T, COMBO_END};
@@ -34,6 +42,14 @@ const uint16_t PROGMEM combo_nvim_layer[] = {TKC_LR, CKC_T, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(combo_enter, KC_ENTER),
+    COMBO(combo_tab, KC_TAB),
+
+    COMBO(combo_en, LCA(KC_1)),
+    COMBO(combo_el, LCA(KC_2)),
+
+    COMBO(combo_slsh, KC_SLSH),
+    COMBO(combo_bsls, KC_BSLS),
+
     COMBO(combo_tmux_layer, MO(TMUX_LAYER)),
     COMBO(combo_nvim_layer, MO(VIM_LAYER)),
 
