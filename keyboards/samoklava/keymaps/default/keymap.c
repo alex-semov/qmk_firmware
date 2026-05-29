@@ -1,0 +1,98 @@
+#include "keycodes.h"
+#include "keymap_us.h"
+#include QMK_KEYBOARD_H
+
+#include "quantum_keycodes.h"
+
+#include "tap_dance.h"
+#include "layer.h"
+#include "keycode.h"
+#include "keycode.c"
+#include "combo.c"
+#include "tap_dance.c"
+
+// clang-format off
+
+const PROGMEM uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS]  = {
+     // ⌨️ Base Layer (Colemak-DH)
+    [DEF_LAYER] = LAYOUT(
+        KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,         KC_J,    KC_L,    KC_U,    KC_Y,    QK_REP,
+        KC_A,   KC_R,   KC_S,   KC_T,   KC_G,         KC_M,   KC_N, KC_E, KC_I,    CKC_O,
+        CKC_Z,    CKC_X,    CKC_C,    CKC_D,    KC_V,         KC_K,    CKC_H,    CKC_COMM, CKC_DOT,  CKC_SCLN,
+                           TKC_LL, TKC_LR, XXXXXXX,            XXXXXXX,  TKC_RL, TKC_RR
+    ),
+
+    // 🧭 Navigation Layer
+    [NAV_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, KC_PASTE, KC_COPY, KC_CUT,                             XXXXXXX, KC_PGDN, KC_PGUP, XXXXXXX,  XXXXXXX,
+        KC_HOME, XXXXXXX, MO(TMUX_LAYER), MO(VIM_LAYER), MO(CLIAPP_LAYER),       KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_END,
+        KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,                             KC_DEL, LCTL(KC_D), LCTL(KC_U), XXXXXXX, XXXXXXX,
+                         XXXXXXX, XXXXXXX,  XXXXXXX,                   XXXXXXX, KC_BSPC, KC_DEL
+    ),
+
+    // 🧭 WM Layer
+    [WM_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        WM_WS_0, WM_WS_9, WM_WS_8, WM_WS_7, WM_WS_6,      WM_WS_5, WM_WS_1, WM_WS_2, WM_WS_3, WM_WS_4,
+        XXXXXXX, XXXXXXX, KC_LSFT, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, KC_RSFT, XXXXXXX, XXXXXXX,
+                          XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+    [CLIAPP_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, CLIAPP_SHOW_RUNNING_CONFIG, CLIAPP_SHOW_XML_RUNNING_CONFIG, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      CLIAPP_INTERFACE, CLIAPP_ENABLE, CLIAPP_TERMINAL_LOGGING, CLIAPP_CONFIG_MODE, CLIAPP_INTERFACE_GBE1,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, CLIAPP_INTERFACE_COMBO1,
+                          XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+
+    // 🧭 VIM Layer
+    [VIM_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                NV_TAB_NEW, NV_BUF_CLOSE, NV_BUF_DELETE, NV_TAB_CLOSE, XXXXXXX,
+        XXXXXXX, XXXXXXX, MO(VIM_TAB_LAYER), XXXXXXX, XXXXXXX,      LCTL(KC_H), LCTL(KC_J), LCTL(KC_K), LCTL(KC_L), NV_PANE_ZOOM,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                NV_PANE_ZOOM_H, NV_SPLIT_H, NV_SPLIT_V, NV_PANE_ZOOM_V, NV_PANE_EQ,
+                          XXXXXXX, XXXXXXX, XXXXXXX,              XXXXXXX,  NV_TAB_PREV, NV_TAB_NEXT
+    ),
+
+    [VIM_TAB_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, NV_TAB_PREV, NV_TAB_NEXT, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                          XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+    // 🧭 TMUX Layer
+    [TMUX_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      TM_WIN_NEW, TM_PANE_CLOSE, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      TM_SES_PREV, TM_WIN_PREV, TM_WIN_NEXT, TM_SES_NEXT, TM_PANE_ZOOM,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      TM_COPY_MODE, TM_SPLIT_H, TM_SPLIT_V, XXXXXXX, XXXXXXX,
+                          XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX
+    ),
+
+
+    // 💲 Symbol Layer
+    [SYM_LAYER] = LAYOUT(
+        KC_TILD, XXXXXXX, KC_QUOTE, KC_GRAVE, KC_AT,          KC_HASH, KC_LABK, KC_RABK, XXXXXXX, XXXXXXX,
+        KC_CIRC, KC_EXLM, KC_LBRC,  KC_RBRC, KC_AMPR,         KC_PERC, KC_LPRN, KC_RPRN, KC_QUES, KC_DLR,
+        XXXXXXX, CKC_PLUS, CKC_EQL, CKC_MINS, XXXXXXX,        KC_ASTR, CKC_LCBR, CKC_RCBR, MOD_RALT, KC_COLN,
+                           KC_UNDS, KC_DQUO, XXXXXXX,        XXXXXXX, XXXXXXX,XXXXXXX
+    ),
+
+    // 🔢 Number Layer
+    [NUM_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, KC_7,    KC_8,    KC_9,    XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, KC_4,    KC_5,    KC_6,    KC_0,
+        KC_LGUI, CKC_PLUS, CKC_EQL, CKC_MINS, XXXXXXX,      KC_ASTR, KC_1,    KC_2,    KC_3,    XXXXXXX,
+                         XXXXXXX,   XXXXXXX, XXXXXXX,       XXXXXXX, KC_BSPC, KC_RSFT
+    ),
+
+    // 🔢 Number Layer
+    [FUN_LAYER] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, KC_F7,    KC_F8,    KC_F9,    XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,        XXXXXXX, KC_F4,    KC_F5,    KC_F6,    KC_F10,
+        KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,        XXXXXXX,  KC_F1,   KC_F2,    KC_F3,    XXXXXXX,
+                                  XXXXXXX,  XXXXXXX, XXXXXXX,      XXXXXXX,  KC_F11, KC_F12
+    ),
+};
+
+// clang-format on

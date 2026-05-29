@@ -5,35 +5,41 @@
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     // Check for Left Control modifier specifically for arrow keys remapping
-    if (get_mods() & MOD_BIT(KC_LCTL)) {
-      switch (keycode) {
-        case KC_UP:
-          tap_code16(LCTL(KC_U));
-          return false; // Consume the key event
-        case KC_DOWN:
-          tap_code16(LCTL(KC_D));
-          return false; // Consume the key event
-      }
-    }
+    // if (get_mods() & MOD_BIT(KC_LCTL)) {
+    //   switch (keycode) {
+    //     case KC_UP:
+    //       tap_code16(LCTL(KC_U));
+    //       return false; // Consume the key event
+    //     case KC_DOWN:
+    //       tap_code16(LCTL(KC_D));
+    //       return false; // Consume the key event
+    //   }
+    // }
 
     switch (keycode) {
-        case RCTL_T(KC_LPRN):
-            if (record->tap.count) {
-                tap_code16(KC_LPRN);
-                return false;
-            }
-            return true; // Allow default processing for hold
-        case RALT_T(KC_LCBR):
+        case CKC_LCBR:
             if (record->tap.count) {
                 tap_code16(KC_LCBR);
                 return false;
             }
             return true; // Allow default processing for hold
 
-        // Explicitly handle custom mod-tap keys for tap behavior
-        case CKC_PLUS: // LGUI_T(KC_PLUS)
+        case CKC_RCBR:
+            if (record->tap.count) {
+                tap_code16(KC_RCBR);
+                return false;
+            }
+            return true; // Allow default processing for hold
+
+        case CKC_PLUS:
             if (record->tap.count) {
                 tap_code16(KC_PLUS);
+                return false;
+            }
+            return true; // Allow default processing for hold (LGUI)
+        case CKC_MINS:
+            if (record->tap.count) {
+                tap_code16(CKC_MINS);
                 return false;
             }
             return true; // Allow default processing for hold (LGUI)
@@ -78,14 +84,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case TM_WIN_PREV:   SEND_STRING(TMUX_PREFIX "p"); break;
       case TM_WIN_NEXT:   SEND_STRING(TMUX_PREFIX "n"); break;
       case TM_WIN_NEW:    SEND_STRING(TMUX_PREFIX "c"); break;
-   case TM_SES_PREV:   SEND_STRING(TMUX_PREFIX "("); break;
+      case TM_SES_PREV:   SEND_STRING(TMUX_PREFIX "("); break;
       case TM_SES_NEXT:   SEND_STRING(TMUX_PREFIX ")"); break;
 
 
 
 
       // --- App Shortcuts ---
-      case TELESCOPE:     SEND_STRING(":Telescope find_files" SS_TAP(X_ENTER)); break;
+
       // --- Window Manager Control (for i3/Sway/etc.) ---
       case WM_WS_1:       SEND_STRING(SS_LGUI("1")); break;
       case WM_WS_2:       SEND_STRING(SS_LGUI("2")); break;

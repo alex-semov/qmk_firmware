@@ -4,23 +4,28 @@
 
 #define TMUX_PREFIX SS_LCTL("b")
 
-#define CKC_R MT(MOD_LGUI, KC_R) // Colemak-DH S
-#define CKC_I MT(MOD_RGUI, KC_I) // Colemak-DH S
-#define CKC_S MT(MOD_LALT, KC_S) // Colemak-DH S
-#define CKC_T MT(MOD_LCTL, KC_T) // Colemak-DH T
-#define CKC_N MT(MOD_RCTL, KC_N) // Colemak-DH N
-#define CKC_E MT(MOD_RALT, KC_E) // Colemak-DH E
+#define CKC_Z MT(MOD_LGUI, KC_Z)
+#define CKC_X MT(MOD_LALT, KC_X)
+#define CKC_C MT(MOD_LSFT, KC_C)
+#define CKC_D MT(MOD_LCTL, KC_D)
+#define CKC_H MT(MOD_RCTL, KC_H)
+#define CKC_COMM MT(MOD_RSFT, KC_COMM)
+#define CKC_DOT MT(MOD_RALT, KC_DOT)
+#define CKC_SCLN MT(MOD_RGUI, KC_SCLN)
 #define CKC_A LT(SYM_QOTE_LAYER, KC_A)
 #define CKC_O LT(SYM_QUES_LAYER, KC_O)
 
-#define CKC_PLUS LGUI_T(KC_PLUS)
-#define CKC_EQL LALT_T(KC_EQL)
+#define CKC_PLUS LALT_T(KC_PLUS)
+#define CKC_EQL LSFT_T(KC_EQL)
 #define CKC_MINS LCTL_T(KC_MINS)
 
-#define TKC_LL MO(NUM_LAYER)         // Tap Key Code for Number Layer
-#define TKC_LR TD(TD_NAV_LAYER)      // Tap Key Code for Navigation Layer
-#define TKC_RL LT(SYM_LAYER, KC_SPC) // Tap Key Code for Symbols Layer
-#define TKC_RR TD(TD_SHIFT)          // Tap Key Code for Shift  Layer
+#define CKC_LCBR LCTL_T(KC_LCBR)
+#define CKC_RCBR LSFT_T(KC_RCBR)
+
+#define TKC_LL MO(NUM_LAYER)
+#define TKC_LR LT(NAV_LAYER, KC_ESC)
+#define TKC_RL LT(SYM_LAYER, KC_SPC)
+#define TKC_RR TD(TD_SHIFT)
 
 enum custom_keycodes {
     // Neovim Pane Navigation

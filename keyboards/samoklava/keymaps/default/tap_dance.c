@@ -68,7 +68,7 @@ void td_nav_layer_finished(tap_dance_state_t *state, void *user_data) {
     tap_state.state = cur_dance(state);
     switch (tap_state.state) {
         case TD_SINGLE_TAP:
-            // tap_code(KC_ESC);
+            tap_code(KC_ESC);
             break;
         case TD_SINGLE_HOLD:
             layer_on(NAV_LAYER);
@@ -83,23 +83,23 @@ void td_nav_layer_finished(tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void td_nav_layer_reset(tap_dance_state_t *state, void *user_data) {
-    switch (tap_state.state) {
-        case TD_SINGLE_TAP:
-            break;
-        case TD_SINGLE_HOLD:
-            layer_off(NAV_LAYER);
-            break;
-        case TD_DOUBLE_TAP:
-            clear_oneshot_layer_state(ONESHOT_PRESSED);
-            break;
-        case TD_DOUBLE_HOLD:
-            break;
-        default:
-            break;
-    }
-    tap_state.state = TD_NONE;
-}
+// void td_nav_layer_reset(tap_dance_state_t *state, void *user_data) {
+//     switch (tap_state.state) {
+//         case TD_SINGLE_TAP:
+//             break;
+//         case TD_SINGLE_HOLD:
+//             layer_off(NAV_LAYER);
+//             break;
+//         case TD_DOUBLE_TAP:
+//             clear_oneshot_layer_state(ONESHOT_PRESSED);
+//             break;
+//         case TD_DOUBLE_HOLD:
+//             break;
+//         default:
+//             break;
+//     }
+//     tap_state.state = TD_NONE;
+// }
 
 // shift
 void td_shift_finished(tap_dance_state_t *state, void *user_data) {
@@ -138,14 +138,15 @@ void td_shift_reset(tap_dance_state_t *state, void *user_data) {
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for Escape, twice for Caps Lock
-    [TD_SCLN_COLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
+    // [TD_SCLN_COLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
     [TD_SHIFT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_shift_finished, td_shift_reset),
-    [TD_NAV_LAYER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_nav_layer_finished, td_nav_layer_reset)};
+    // [TD_NAV_LAYER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_nav_layer_finished, td_nav_layer_reset)
+ };
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
-            return 175;
+            return 200;
         default:
             return TAPPING_TERM;
     }

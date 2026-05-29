@@ -1,5 +1,5 @@
 /*
-Copyright 2020 Pierre Chevalier <pierrechevalier83@gmail.com>
+Copyright 2022 Dalius Dobravolskas <dalius.dobravolskas@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,20 +14,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
-#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+#include QMK_KEYBOARD_H
 
-#define COMBO_ONLY_FROM_LAYER 0
+bool update_flow(
+    uint16_t keycode,
+    bool pressed,
+    keypos_t key_position
+);
 
-#define CHORDAL_HOLD
-#define PERMISSIVE_HOLD
-// #define RETRO_TAPPING
-#define FLOW_TAP_TERM 150
-#define COMBO_TERM 90
-
-#define TAPPING_TERM 200
-#define TAPPING_TERM_PER_KEY
-
-#define DEBOUNCE 10
+void flow_matrix_scan(void);
