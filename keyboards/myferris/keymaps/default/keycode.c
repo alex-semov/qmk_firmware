@@ -69,6 +69,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // COMBO
             case COMBO_NV_SAVE: SEND_STRING(":w" SS_TAP(X_ENTER)); break;
             case COMBO_NV_NOA_SAVE: SEND_STRING(":noa w" SS_TAP(X_ENTER)); break;
+
+      // --- OS-aware clipboard ---
+      // Cmd (GUI) on macOS/iOS, Ctrl on Linux/Windows/everything else.
+      case OS_COPY:
+      case OS_PASTE:
+      case OS_CUT: {
+          os_variant_t os = detected_host_os();
+          uint8_t mod = (os == OS_MACOS || os == OS_IOS) ? KC_LGUI : KC_LCTL;
+          uint8_t key = (keycode == OS_COPY) ? KC_C : (keycode == OS_PASTE) ? KC_V : KC_X;
+          register_code(mod);
+          tap_code(key);
+          unregister_code(mod);
+          break;
+      }
+      // Paste without formatting: GUI(Cmd)+Shift+V on macOS/iOS, Ctrl+Shift+V elsewhere
+      case OS_PASTE_PLAIN: {
+          os_variant_t os = detected_host_os();
+          uint8_t mod = (os == OS_MACOS || os == OS_IOS) ? KC_LGUI : KC_LCTL;
+          register_code(mod);
+          register_code(KC_LSFT);
+          tap_code(KC_V);
+          unregister_code(KC_LSFT);
+          unregister_code(mod);
+          break;
+      }
       // Tmux
       // --- Tmux Control ---
       case TM_PREFIX:     SEND_STRING(TMUX_PREFIX); break;

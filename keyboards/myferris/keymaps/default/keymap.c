@@ -24,7 +24,7 @@ const PROGMEM uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS]  = {
 
     // 🧭 Navigation Layer
     [NAV_LAYER] = LAYOUT(
-        XXXXXXX, XXXXXXX, KC_PASTE, KC_COPY, KC_CUT,                             XXXXXXX, KC_PGDN, KC_PGUP, XXXXXXX,  XXXXXXX,
+        XXXXXXX, OS_PASTE_PLAIN, OS_PASTE, OS_COPY, OS_CUT,                      XXXXXXX, KC_PGDN, KC_PGUP, XXXXXXX,  XXXXXXX,
         KC_HOME, XXXXXXX, MO(TMUX_LAYER), MO(VIM_LAYER), MO(CLIAPP_LAYER),       KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_END,
         KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,                             KC_DEL, LCTL(KC_D), LCTL(KC_U), XXXXXXX, XXXXXXX,
                                              XXXXXXX, XXXXXXX,                   KC_BSPC, XXXXXXX

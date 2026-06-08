@@ -13,7 +13,7 @@ const uint16_t PROGMEM combo_el[] = {KC_F, KC_T, COMBO_END};
 
 const uint16_t PROGMEM combo_slsh[] = {CKC_H, KC_E, COMBO_END};
 const uint16_t PROGMEM combo_bsls[] = {KC_N, CKC_COMM, COMBO_END};
-const uint16_t PROGMEM combo_pipe[] = {KC_H, CKC_COMM, COMBO_END};
+const uint16_t PROGMEM combo_pipe[] = {CKC_H, CKC_COMM, COMBO_END};
 
 
 // const uint16_t PROGMEM combo_tmux_layer[] = {TKC_LR, KC_S, COMBO_END};

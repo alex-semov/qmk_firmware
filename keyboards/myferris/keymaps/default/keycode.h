@@ -90,5 +90,11 @@ enum custom_keycodes {
 
     COMBO_ENTER,
     COMBO_NV_SAVE,
-    COMBO_NV_NOA_SAVE
+    COMBO_NV_NOA_SAVE,
+
+    // OS-aware clipboard: GUI(Cmd)+key on macOS/iOS, Ctrl+key elsewhere
+    OS_COPY,
+    OS_PASTE,
+    OS_PASTE_PLAIN, // paste without formatting (adds Shift)
+    OS_CUT
 };
